@@ -2,20 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
 var builder = WebApplication.CreateBuilder(args);
-using Npgsql;
 
 //builder.Services.AddSqlServer<ApplicationDbContext>(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING"));
 
 
 
-// Best practice is to scope the NpgsqlConnection to a "using" block
-using (NpgsqlConnection conn = new NpgsqlConnection(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")))
-{
-    // Connect to the database
-    conn.Open();
+// Add database context and cache
+builder.Services.AddDbContext<MyDatabaseContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
 
-
-}
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
