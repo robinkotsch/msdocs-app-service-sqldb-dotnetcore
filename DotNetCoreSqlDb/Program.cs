@@ -24,7 +24,7 @@ SecretClientOptions options = new SecretClientOptions()
             Mode = RetryMode.Exponential
          }
     };
-var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/secrets/AZURE-SQL-CONNECTIONSTRING/ae3c0bf81d614aefb4e51cff37cc94ad"), new DefaultAzureCredential(),options);
+var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential(),options);
 
 KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
@@ -36,8 +36,8 @@ string secretValue = secret.Value;
 
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
-      options.UseSqlServer(secretValue));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+      //options.UseSqlServer(secretValue));
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
