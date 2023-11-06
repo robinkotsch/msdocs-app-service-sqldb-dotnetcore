@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-
+/*
 
 SecretClientOptions options = new SecretClientOptions()
     {
@@ -29,7 +29,7 @@ var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"),
 KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
 string secretValue = secret.Value;
-
+*/
 
 
 
