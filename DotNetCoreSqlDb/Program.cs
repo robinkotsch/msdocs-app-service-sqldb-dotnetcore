@@ -1,16 +1,46 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
+
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Core;
+
+using 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddSqlServer<ApplicationDbContext>(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING"));
 
 
 
+
+
+SecretClientOptions options = new SecretClientOptions()
+    {
+        Retry =
+        {
+            Delay= TimeSpan.FromSeconds(2),
+            MaxDelay = TimeSpan.FromSeconds(16),
+            MaxRetries = 5,
+            Mode = RetryMode.Exponential
+         }
+    };
+var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/secrets/AZURE-SQL-CONNECTIONSTRING/ae3c0bf81d614aefb4e51cff37cc94ad"), new DefaultAzureCredential(),options);
+
+KeyVaultSecret secret = client.GetSecret("<AZURE-SQL-CONNECTIONSTRING>");
+
+string secretValue = secret.Value;
+
+
+
+
+
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
-
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+      options.UseSqlServer(secretValue));
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
