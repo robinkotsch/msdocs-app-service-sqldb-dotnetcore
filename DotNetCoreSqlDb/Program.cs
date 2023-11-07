@@ -11,8 +11,8 @@ using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
-builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+//var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+//builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 //builder.Services.AddSqlServer<ApplicationDbContext>(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING"));
 
