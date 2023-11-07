@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "redis1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ServiceLinker/locations/germanywestcentral/connectors/AZUREREDISCONNECTIONSTRING_8DF6C04DF5",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Cache/Redis/todo-iiot-cache",
+      "type": "redis.azure",
+      "connectionId": "AZURE-REDIS-CONNECTIONSTRING",
+      "dynamicId": null
+    }
+  }
+}
