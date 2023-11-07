@@ -5,8 +5,14 @@ using DotNetCoreSqlDb.Data;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
+
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 //builder.Services.AddSqlServer<ApplicationDbContext>(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING"));
 
@@ -37,15 +43,16 @@ string secretValue = secret.Value;
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
-      //options.UseSqlServer(secretValue));
-
+//options.UseSqlServer(secretValue));
+Debug.WriteLine("test");
+Debug.WriteLine(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
 builder.Services.AddStackExchangeRedisCache(options =>
 {
 options.Configuration = builder.Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
 options.InstanceName = "SampleInstance";
 });
 
-
+Debug.WriteLine(builder.Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING"));
 
 
 

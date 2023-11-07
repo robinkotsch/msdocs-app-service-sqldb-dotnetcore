@@ -1,11 +1,13 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets"
-    },
     "redis1": {
       "type": "redis",
       "connectionId": "AZURE-REDIS-CONNECTIONSTRING",
+      "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "VaultUri",
       "dynamicId": null
     }
   }
