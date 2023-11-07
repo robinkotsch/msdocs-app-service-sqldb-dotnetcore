@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-/*
+
 
 SecretClientOptions options = new SecretClientOptions()
     {
@@ -29,15 +29,14 @@ var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"),
 KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
 string secretValue = secret.Value;
-*/
 
 
 
 
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
-      //options.UseSqlServer(secretValue));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+      options.UseSqlServer(secretValue));
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
