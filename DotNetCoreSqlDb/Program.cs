@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-
+/*
 SecretClientOptions options = new SecretClientOptions()
     {
         Retry =
@@ -30,6 +30,7 @@ KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
 string secretValue = secret.Value;
 
+*/
 
 
 
