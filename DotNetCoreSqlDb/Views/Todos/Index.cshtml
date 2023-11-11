@@ -4,10 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
+    <p>Secret value from Azure Key Vault: @ViewBag.Test</p>
+    <h1 class="display-4">Welcome @Configuration["FromMessage"]</h1>
 </p>
 <table class="table">
     <thead>
