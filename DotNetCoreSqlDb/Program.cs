@@ -31,13 +31,15 @@ SecretClientOptions options = new SecretClientOptions()
          }
     };
 */
+
+/*
 var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential());
 
 KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
 string secretValue = secret.Value;
 
-
+*/
 
 
 
