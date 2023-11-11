@@ -40,15 +40,15 @@ public class Program
         /*
         try
         {
-        
+        */
 
        
-            var client = new SecretClient(new Uri("https://keyvaultpiiot.vault.azure.net/"), new DefaultAzureCredential());
+            var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential());
 
             KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
             secretValue = secret.Value;
-       
+        /*
         }
         catch (Exception e)
         {
