@@ -36,6 +36,7 @@ public class Program
         */
 
         Program.Test = "test";
+
         string secretValue = String.Empty;
         /*
         try
