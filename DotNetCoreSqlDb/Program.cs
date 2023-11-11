@@ -49,6 +49,7 @@ public class Program
             KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
             secretValue = secret.Value;
+
         /*
         }
         catch (Exception e)
