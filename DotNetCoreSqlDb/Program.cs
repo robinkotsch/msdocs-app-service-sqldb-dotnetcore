@@ -30,13 +30,27 @@ SecretClientOptions options = new SecretClientOptions()
             Mode = RetryMode.Exponential
          }
     };
-var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential(),options);
+*/
+var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential());
 
 KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
 string secretValue = secret.Value;
 
+
+
+
+
+/*
+var configuration = builder.Configuration.AddAzureKeyVault(
+    new Uri($"https://iiot-keyvault.vault.azure.net/"),
+    new DefaultAzureCredential());
 */
+
+
+
+//string configvalue = configuration["AZURE-SQL-CONNECTIONSTRING"];
+
 
 
 
@@ -49,6 +63,7 @@ Debug.WriteLine(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONS
 builder.Services.AddStackExchangeRedisCache(options =>
 {
 options.Configuration = builder.Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
+
 options.InstanceName = "SampleInstance";
 });
 
