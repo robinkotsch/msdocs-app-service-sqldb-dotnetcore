@@ -14,73 +14,27 @@ namespace DotNetCoreSqlDb.Controllers;
 
 public class Program
 {
-    public static string Test { get; private set; }
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
 
-        /*
-        SecretClientOptions options = new SecretClientOptions()
-        {
-            Retry =
-                {
-                    Delay= TimeSpan.FromSeconds(2),
-                    MaxDelay = TimeSpan.FromSeconds(16),
-                    MaxRetries = 5,
-                    Mode = RetryMode.Exponential
-                 }
-        };
-
-
-        */
-
-        Program.Test = "test";
 
         string secretValue = String.Empty;
-        /*
-        try
-        {
-        */
+
 
        
-            var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential());
+        var client = new SecretClient(new Uri("https://iiot-keyvault.vault.azure.net/"), new DefaultAzureCredential());
 
-            KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
+        KeyVaultSecret secret = client.GetSecret("AZURE-SQL-CONNECTIONSTRING");
 
-            secretValue = secret.Value;
-
-        /*
-        }
-        catch (Exception e)
-        {
-            String error = e.Message;
-
-            Program.Test = error;
-            
-            
-        }
-        if (secretValue != String.Empty)
-        {
-            Program.Test = secretValue;
-        }
-
-        
-        
-
-
-
-        /*
-        builder.Configuration.AddAzureKeyVault(
-            new Uri($"https://iiot-keyvault.vault.azure.net/"),
-            new DefaultAzureCredential());
-        */
-
+        secretValue = secret.Value;
 
 
         // Add database context and cache
         builder.Services.AddDbContext<MyDatabaseContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+            //options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+            options.UseSqlServer(secretValue));
 
         builder.Services.AddStackExchangeRedisCache(options =>
         {

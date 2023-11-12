@@ -15,8 +15,6 @@ namespace DotNetCoreSqlDb.Controllers
 
         public IActionResult Index()
         {
-
-            ViewBag.Test = Program.Test;
             return View();
         }
 
